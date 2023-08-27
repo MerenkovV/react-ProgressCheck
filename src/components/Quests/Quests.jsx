@@ -1,6 +1,12 @@
 import React, { useRef } from 'react'
 import QuestItem from './QuestItem/QuestItem';
 import axios from 'axios';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import { Button, TextField } from '@mui/material';
+
 
 let text;
 let LastID;
@@ -8,8 +14,6 @@ let LastID;
 const handleChange = event => {
     text = event.target.value;
 };
-
-const input = React.createRef();
 
 let flag = true;
 
@@ -39,15 +43,16 @@ export default function Quests(props) {
             if(text !== ""){
                 LastID++;
                 props.AddQuest(text, LastID);
-                input.current.value = '';
+                document.getElementById("newPost").value = '';
             }
         }
     };
 
   return (
     <div>
-        <p>{QuestElements}</p>
-        <div><input ref={input} type="text" onChange={handleChange}/><button onClick={ClickPost}>Post</button></div>
+        <ul>{QuestElements}
+        <li style={{listStyleType: "none", marginTop: "30px", maxWidth: '100%'}}><TextField style={{width: '50%'}} size="small" id='newPost' label="Add new task" onChange={handleChange}/><Button variant="contained" onClick={ClickPost}>Post</Button></li>
+        </ul>
     </div>
   )
 }
